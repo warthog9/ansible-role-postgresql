@@ -68,18 +68,10 @@ Examples
             ]
       }
   
-## Dependencies
+Dependencies
+------------
 
 None.
-
-## Example Playbook
-
-    ---
-    - hosts: all
-      sudo: yes
-      roles:
-      - znzj.ja_jp
-      - znzj.zabbix
 
 License
 -------

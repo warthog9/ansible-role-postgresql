@@ -10,12 +10,12 @@
   when: ansible_os_family == "RedHat"
 
 - name: Install the nginx packages 
-  yum: name={{ item }} state=present
+  yum: name="{{ item }}" state=present
   with_items: redhat_pkg
   when: ansible_os_family == "RedHat"
 
 - name: Install the postgres packages 
-  apt: name={{ item }} state=present update_cache=yes
+  apt: name="{{ item }}" state=present update_cache=yes
   with_items: ubuntu_pkg
   when: ansible_os_family == "Debian"
 
