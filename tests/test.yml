@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  remote_user: root
+  roles:
+    - { role: ansible-role-postgresql,
+            databases: [
+              { name: testdb,
+                users: [
+                  { user: testuser1,
+                    password: 12345,
+                    privileges: ALL,
+                    type: database },
+                  { user: testuser2,
+                    password: 12345,
+                    privileges: ALL,
+                    type: database },
+                ]
+              }
+            ]
+      }
+          

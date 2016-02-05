@@ -1,0 +1,58 @@
+---
+language: python
+python: "2.7"
+
+# Do not use the new container infrastructure
+sudo: true
+
+# Install ansible
+addons:
+  apt:
+    packages:
+    - python-pip
+
+install:
+  # Install ansible
+  - pip install git+https://github.com/ansible/ansible.git
+  
+  # Check ansible version
+  - ansible --version
+
+  # Create ansible.cfg with correct roles_path
+  - printf '[defaults]\nroles_path=../' >ansible.cfg
+
+script:
+  # Basic role syntax check
+  - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+
+  # Run the role
+  - ansible-playbook tests/test.yml -i tests/inventory --connection=local -b -vvv
+
+  # Run the role again, checking to make sure it's idempotent
+  - >
+     ansible-playbook tests/test.yml -i tests/inventory --connection=local -b
+     | grep -q 'changed=0.*failed=0'
+     && (echo 'Idempotence test: pass' && exit 0)
+     || (echo 'Idempotence test: fail' && exit 1)
+
+  - touch ~/.pgpass
+  
+  - echo localhost:5432:testuser1:testdb:12345 >> ~/.pgpass
+  
+  - chmod 600 ~/.pgpass
+  
+  
+  # Test local db
+  - psql -d testdb -U testuser1 -c "CREATE TABLE testtable ( testfield varchar(100) );"
+  - psql -d testdb -U testuser1 -c "INSERT INTO testtable (testfield) VALUES (\"foo\");"
+  - psql -d testdb -U testuser1 -c "SELECT * FROM testtable;" 
+     | grep -q 'foo'
+     && (echo 'Database test: pass' && exit 0)
+     || (echo 'Database test: fail' && exit 1)
+  
+
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+
+

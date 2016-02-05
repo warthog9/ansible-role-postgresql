@@ -1,0 +1,19 @@
+---
+# vars file for repleo.postgresql
+
+redhat_pkg:
+  - libpq-dev
+  - python-dev
+  - python-pip
+  - postgresql
+  - postgresql-client-9.4
+  - postgresql-server-dev-9.4
+
+ubuntu_pkg:
+  - python-selinux
+  - libpq-dev
+  - python-dev
+  - python-pip
+  - postgresql
+  - postgresql-client-9.4
+  - postgresql-server-dev-9.4

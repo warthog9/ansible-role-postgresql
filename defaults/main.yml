@@ -1,0 +1,32 @@
+---
+# defaults file for repleo.postgresql
+
+
+#
+#Example:
+#
+#databases:
+#  - name: database_name1
+#    users:
+#      - user: user_name1
+#        password: user_password
+#        privileges: ALL
+#        type: database
+#      - user: user_name2
+#        password: user_password
+#        privileges: ALL
+#        type: database
+#  - name: database_name2
+#    users:
+#      - user: user_name1
+#        password: user_password
+#        privileges: ALL
+#        type: database
+   
+databases:
+  - name: 
+    users:
+      - user: 
+        password: 
+        privileges: 
+        type: 
