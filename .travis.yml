@@ -35,20 +35,7 @@ script:
      && (echo 'Idempotence test: pass' && exit 0)
      || (echo 'Idempotence test: fail' && exit 1)
 
-  - touch ~/.pgpass
-  
-  - echo localhost:5432:testuser1:testdb:12345 >> ~/.pgpass
-  
-  - chmod 600 ~/.pgpass
-  
-  
-  # Test local db
-  - psql -d testdb -U testuser1 -c "CREATE TABLE testtable ( testfield varchar(100) );"
-  - psql -d testdb -U testuser1 -c "INSERT INTO testtable (testfield) VALUES (\"foo\");"
-  - psql -d testdb -U testuser1 -c "SELECT * FROM testtable;" 
-     | grep -q 'foo'
-     && (echo 'Database test: pass' && exit 0)
-     || (echo 'Database test: fail' && exit 1)
+  - tests/testdb.sh
   
 
 
