@@ -2,6 +2,7 @@
 - hosts: localhost
   remote_user: root
   roles:
+    - { role: repleo.sudo }
     - { role: ansible-role-postgresql,
             databases: [
               { name: testdb,
