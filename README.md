@@ -1,6 +1,7 @@
 Ansible role - Postgresql database install role
 =====
 [![Build Status](https://travis-ci.org/repleo/ansible-role-postgresql.svg?branch=master)](https://travis-ci.org/repleo/ansible-role-postgresql)
+[![Ansible Galaxy](http://img.shields.io/badge/galaxy-repleo.postgresql-660198.svg?style=flat)](https://galaxy.ansible.com/repleo/postgresql)
 
 This role installs and configures a postgresql server, or add new databases and user to an existing installation 
 
