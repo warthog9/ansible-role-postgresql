@@ -12,10 +12,6 @@ addons:
     - python-pip
 
 install:
-  # test
-  - mkdir /tmp/test
-  - sudo chown -R postgres /tmp/test/ && sleep 0
-  
   # Install ansible
   - pip install git+https://github.com/ansible/ansible.git
   
