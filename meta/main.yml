@@ -25,7 +25,9 @@ galaxy_info:
     - postgresql
     - database
     - server
-dependencies: []
+dependencies: 
+  - { role: repleo.sudo }
+
 
 
   
