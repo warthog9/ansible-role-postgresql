@@ -28,8 +28,9 @@
   service: name=postgresql state=started enabled=yes
 
 - name: Create database if not exist
-  sudo: yes
-  sudo_user: postgres
+  become: yes
+  become_method: sudo
+  become_user: postgres
   postgresql_db: name="{{item.name}}"
   with_items: 
    - "{{ databases }}"
@@ -38,8 +39,9 @@
    - item.name != None
    
 - name: Create database user
-  sudo: yes
-  sudo_user: postgres
+  become: yes
+  become_method: sudo
+  become_user: postgres
   postgresql_user: db="{{item.0.name}}" name="{{item.1.user}}" password="{{item.1.password}}" 
   with_subelements: 
    - "{{databases}}"
@@ -51,8 +53,9 @@
    - item.1.user != None   
 
 - name: Set database user privileges
-  sudo: yes
-  sudo_user: postgres
+  become: yes
+  become_method: sudo
+  become_user: postgres
   postgresql_privs: >
     db="{{item.0.name}}"
     privs="{{item.1.privileges}}"
