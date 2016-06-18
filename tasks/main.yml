@@ -9,14 +9,14 @@
   copy: src=epel.repo dest=/etc/yum.repos.d/epel_ansible.repo
   when: ansible_os_family == "RedHat"
 
-- name: Install the nginx packages 
+- name: Install the postgress packages 
   yum: name="{{ item }}" state=present
-  with_items: redhat_pkg
+  with_items: "{{redhat_pkg}}"
   when: ansible_os_family == "RedHat"
 
 - name: Install the postgres packages 
   apt: name="{{ item }}" state=present update_cache=yes
-  with_items: ubuntu_pkg
+  with_items: "{{ubuntu_pkg}}"
   when: ansible_os_family == "Debian"
 
 - name: Install python pip packages for database configuration
@@ -42,7 +42,7 @@
   sudo_user: postgres
   postgresql_user: db="{{item.0.name}}" name="{{item.1.user}}" password="{{item.1.password}}" 
   with_subelements: 
-   - databases
+   - "{{databases}}"
    - users
   when:
    - item.0.name is defined
@@ -59,7 +59,7 @@
     type="{{item.1.type}}"
     role="{{item.1.user}}"
   with_subelements: 
-   - databases
+   - "{{databases}}"
    - users
   when:
    - item.0.name is defined
