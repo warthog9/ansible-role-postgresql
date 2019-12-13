@@ -20,9 +20,26 @@
   when: ansible_os_family == "Debian"
 
 - name: Install python pip packages for database configuration
-  pip: name={{item.name}} version={{item.version}} executable=pip
+  pip:
+    name={{item.name}}
+    executable=pip
   with_items:
-  - {name: 'psycopg2', version: '2.6' }
+  - name: 'psycopg2'
+
+- name: Instal pip3 if it's not installed (Debian)
+  apt:
+    name: python3-pip
+    state: present
+    update_cache: yes
+  when: ansible_python_interpreter == "/usr/bin/python3"
+  
+- name: Install python pip packages for database configuration
+  pip:
+    name={{item.name}}
+    executable=pip3
+  with_items:
+  - name: 'psycopg2'
+  when: ansible_python_interpreter == "/usr/bin/python3"
   
 - name: start the postgresql service
   service: name=postgresql state=started enabled=yes
