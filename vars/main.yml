@@ -6,14 +6,14 @@ redhat_pkg:
   - python-dev
   - python-pip
   - postgresql
-  - postgresql-client-9.4
-  - postgresql-server-dev-9.4
+  - postgresql-client
+  - postgresql-server-dev
 
 ubuntu_pkg:
   - python-selinux
   - libpq-dev
   - python-dev
   - python-pip
-  - postgresql-9.4
-  - postgresql-client-9.4
-  - postgresql-server-dev-9.4
+  - postgresql
+  - postgresql-client
+  - postgresql-server-dev-all
